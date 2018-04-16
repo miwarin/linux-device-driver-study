@@ -26,19 +26,7 @@ static int mydevice_open(struct inode* inode, struct file* fp)
 static int mydevice_read(struct file* fp, char __user* buf, size_t count, loff_t* f_pos)
 {
 	printk("mydevice_read");
-
-	if(debug_read_size > 0) {
-		int len;
-		len = sprintf(buf, "%d\n", debug_prm1);
-		debug_read_size -= 4;
-		return len;
-	}
-	else {
-		return 0;
-	}
-
-	return 0;
-
+	return simple_read_from_buffer(buf, count, f_pos, &debug_prm1, 4);
 }
 
 static int mydevice_write(struct file* fp, const char __user* buf, size_t count, loff_t* f_pos)
