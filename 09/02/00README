@@ -1,0 +1,7 @@
+rpi のピンに以下のように接続しておいた。
+
+* ピン6(GND) を LED のカソードに接続
+* ピン8(BCM14, GPIO14) を LED のアノードに接続 (GPIO_PIN_LEDとして使う)
+* ピン10(BCM15, GPIO15) を入力の割り込み検知として使う(GPIO_PIN_BTNとして使う)
+
+参考 https://pinout.xyz/
