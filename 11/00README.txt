@@ -3,15 +3,7 @@ I2C-1 が使われている
     $ i2cdetect -l
     i2c-1   i2c             bcm2835 I2C adapter                     I2C adapte
 
-dts ファイルの aliases でアドレスが分かる。
-
-    aliases {
-      i2c0 = "/soc/i2c@7e205000";
-      i2c1 = "/soc/i2c@7e804000";
-      i2c2 = "/soc/i2c@7e805000";
-    };
-
-あるいはここにでも分かる( The Raspberry Pi, a temperature sensor and the device tree. https://bergzand.net/the-raspberry-pi-a-temperature-sensor-and-the-device-tree.html )
+I2C_1 のアドレスはこれで分かる。
 
     $ cat /sys/class/i2c-adapter/i2c-1/uevent 
     OF_NAME=i2c
@@ -20,7 +12,18 @@ dts ファイルの aliases でアドレスが分かる。
     OF_COMPATIBLE_N=1
     OF_ALIAS_0=i2c1
 
+スレーブアドレスはこれで確認できる。
 
+$ i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- 2a -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
 
 しかし insmod しても prob が呼ばれてない。
 
